@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Restaurante Epic Food</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://coderthemes.com/hyper/saas/assets/css/vendor/dataTables.bootstrap4.css" rel="stylesheet"
+        type="text/css" />
+    <link href="https://coderthemes.com/hyper/saas/assets/css/vendor/responsive.bootstrap4.css" rel="stylesheet"
+        type="text/css" />
+    <script src="js/scripts.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <!-- Datatables js -->
+    <script src="js/firebase.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/general.js"></script>
+
+
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="index.html">EpicFood</a>
+            <button
+                class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded"
+                type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#menu">Menu</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            href="#about">Galería</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            data-toggle="modal" data-target="#exampleModalScrollable">Login</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                            data-toggle="modal" data-target="#exampleModalScrollable1">Registrate</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Avatar Image-->
+            <img class="masthead-avatar mb-5" src="assets/img/porcion.png" alt="" />
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">EpicFood</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">Restaurante</p>
+        </div>
+    </header>
+
+    <!-- SE INICIA EL MENU-->
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="menu">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Menu</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <div class="table-responsive">
+                <table id="basic-datatable" class="table table-dark">
+
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Platillo</th>
+                            <th>Precio</th>
+                            <th>Dia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- FINALIZA EL MENU-->
+
+    <!-- SE INICIA LA GALERIA-->
+    <!-- About Section-->
+    <section class="page-section bg-primary text-white mb-0" id="about">
+        <div class="container">
+            <!-- About Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-white">Galería</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="card-group" id="columna">
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin del modal-->
+    <!-- About Section-->
+    <!-- FINALIZA LA GALERIA-->
+
+    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Iniciar Sesion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal1" style="padding: 0rem 1rem;">
+                    <div class="text-center">
+                        <img class="mb-4" src="assets/img/porcion.png" alt="" width="72" height="72">
+                        <h1 class="h3 mb-3 text-uppercase">EpicFood</h1>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Ingrese Correo</label>
+                        <input type="text" class="form-control" id="correoL" placeholder="Correo">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Ingrese contraseña</label>
+                        <input type="password" class="form-control" id="contraL" placeholder="contraseña">
+                    </div>
+                    <button type="button" class="btn btn-primary" id="iniciar">Iniciar</button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Listo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModalScrollable1" tabindex="-1" aria-labelledby="exampleModalScrollableTitle1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 0rem 1rem;">
+                    <div class="text-center">
+                        <img class="mb-4" src="assets/img/porcion.png" alt="" width="50" height="50">
+                        <h1 class="h5 mb-3 text-uppercase">EpicFood</h1>
+                    </div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" style="pointer-events: none;" >Registro</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" style="pointer-events: none;" >Informacion</a>
+                        </li>
+                      </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Ingrese Correo</label>
+                                <input type="text" class="form-control" id="correoR" placeholder="Correo">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Ingrese contraseña</label>
+                                <input type="password" class="form-control" id="contraR" placeholder="contraseña">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="registro">Siguiente</button>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Ingrese Nombre</label>
+                                <input type="text" class="form-control" id="nombreR" placeholder="Nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Ingrese su edad</label>
+                                <input type="text" class="form-control" id="edadR" placeholder="Edad">
+                            </div>
+                            <button type="button" class="btn btn-primary" id="informacion">Finalizar</button>
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Listo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Location-->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Localizacion</h4>
+                    <p class="lead mb-0" id="local">
+                        Calle a Plan del Pino Km 1 1/2. Ciudadela Don Bosco, Soyapango, El Salvador, CA.
+
+                </div>
+                <!-- Footer Social Icons-->
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Programadores</h4>
+                    <li href="#!">Robero Gonzalez</li>
+                    <li href="#!">Emerson Gudiel</li>
+                    <li href="#!">Alejandro Mendoza</li>
+                </div>
+                <!-- Footer About Text-->
+                <div class="col-lg-4">
+                    <h4 class="text-uppercase mb-4">Contactanos</h4>
+                    <p class="lead mb-0" id="contacto">
+                        Telefonos 2222-5555 y 7296-6192
+                    </p>
+                    <p class="lead mb-0" id="correo">
+                        Telefonos 2222-5555 y 7296-6192
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright © Universidad Don Bosco 2020</small></div>
+    </div>
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+    <div class="scroll-to-top d-lg-none position-fixed">
+        <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i
+                class="fa fa-chevron-up"></i></a>
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <script src="assets/img/mail/jqBootstrapValidation.js"></script>
+    <script src="assets/img/mail/contact_me.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
