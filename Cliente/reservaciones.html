@@ -28,7 +28,7 @@
     <!-- Datatables js -->
     <script src="js/firebase.js"></script>
     <script src="js/general.js"></script>
-    <script src="js/reservaciones.js"></script>
+    <script src="js/reservacion_user.js"></script>
 </head>
 
 <body id="page-top">
@@ -52,8 +52,6 @@
                         href="Galeria.html">Galeria</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             href="Reservaciones.html">Reservaciones</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
-                        href="informacion.html">Informacion</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
                             id="Csesion"   href="#">Cerrar Sesion</a></li>
                 </ul>
@@ -76,7 +74,6 @@
                 <div class="divider-custom-line"></div>
             </div>
             <table id="basic-datatable" class="table table-dark">
-                <a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#exampleModalScrollable" id="guardar" ><i class="mdi mdi-plus-circle mr-2"></i>Nueva Mesa</a>
                 <thead>
                     <tr>
                         <th>ID</th> 
@@ -105,9 +102,9 @@
             </div>
             <div class="modal-body" style="padding: 0rem 1rem;">
                 <div class='form-group39' id="actualizar"  ></div>
-                <button type='button' class='btn btn-primary' id='edita' >Terminar Reservacion</button>
+                <button type='button' class='btn btn-primary' id='edita' >Reservar</button>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Listo</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" >Listo</button>
             </div>
           </div>
         </div>

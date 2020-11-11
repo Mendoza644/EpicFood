@@ -37,20 +37,18 @@ function dateActuality() {
     var fh = new Date();
     return fh.getFullYear() + "-" + (fh.getMonth() + 1) + "-" + fh.getDate() + " " + fh.getHours() + ":" + fh.getMinutes();
 }
-function insertTask(Hora, Pedido, Estado, ID, n,Total) {
+function insertTask(Hora, Personas, Estado, ID,correo,n,Telefono) {
     db.ref('Reservaciones/').child("Mesa " + n).set({
         Hora: Hora,
-        Pedido: Pedido,
+        Personas: Personas,
         Estado: Estado,
         ID: ID,
-        Total:Total
+        Correo:correo,
+        Telefono:Telefono
     });
 }
 // Para insertar a firebase
 function onClickInsert() {
-
-   
-    
     //devuelve el numero de hijos
     var numero = db.ref('Reservaciones/');
  var nu =   numero.once("value")
@@ -58,31 +56,39 @@ function onClickInsert() {
             var a = snapshot.numChildren();
             //insertamos la mesa
             inHTML("tabla", "");
-           insertTask("00:00", "Sin Pedido", "Sin Reservar", "0000", a+1,"0");
-        });
-    
-  // 
+           insertTask("00:00", "0 Personas", "Sin Reservar", "0000","correo@correo.com", a+1,"0000-0000");
+        }); 
     alert("saved successfully");
 
 }
 // para editar en firebase
-function updateTask(Hora, Pedido, Estado, ID,Total, key) {
+function updateTask(Hora, Personas, Estado, ID,Telefono,correo, key) {
     db.ref('Reservaciones/' + key).update({
         Hora: Hora,
-        Pedido: Pedido,
+        Personas: Personas,
         Estado: Estado,
         ID: ID,
-        Total:Total
+        Correo:correo,
+        Telefono:Telefono
+    });
+}
+function updateHora(key) {
+    db.ref('Hora/' + key).update({
+        Estado: "Sin Reservar"
     });
 }
 function onClickUpdate() {
-  
+
     var key = value("key");
-   
+    var keyH = value("keyH");
         inHTML("tabla", "");
-        updateTask("00:00", "Sin Pedido", "Sin Reservar", "0000","0",key);
-        //   inHTML(viewDataUpdate,'actualizar');
-        alert("modify successfully");
+        updateTask("00:00", "0 Personas", "Sin Reservar", "0000","0000-0000","correo@correo.com",key);
+        updateHora(keyH);
+      
+        alert("Reservacion terminada");
+        asignation("personas","");
+        asignation("correo","");
+        asignation("telefono","");
 
    
 }
@@ -95,43 +101,41 @@ function removeTask(key) {
 }
 
 // Crear toda la tabla desde el javascript
-function table(Estado, Hora, Id, Pedido,Total, key) {
+function table(Estado, Hora, Personas, Id,Telefono,Correo, key) {
 
     return '<tr><td>' + Id + '</td><td>' + Estado  + '</td><td>' + Hora + '</td>'  +
-    '<td><a href="#" class="btn btn-primary " data-toggle="modal" data-target="#exampleModalScrollable1" onclick="viewDataUpdate(\''  + Id + '\',\''+ Pedido + '\',\'' + Total + '\',\'' + key +'\')">' +
+    '<td><a href="#" class="btn btn-primary " data-toggle="modal" data-target="#exampleModalScrollable1" onclick="viewDataUpdate(\''  + Id + '\',\''+ Personas + '\',\'' + Telefono + '\',\'' + Correo +'\',\''+ Hora +'\',\'' + key +'\')">' +
     '<i class="fas fa-edit blue icon-lg"></i></a>' +
         '<a href="#" class="btn btn-danger " onclick="removeTask(\'' + key + '\')">' +
         '<i class="fas fa-trash-alt red icon-lg"></i></a></td></tr>';
 }
-function viewDataUpdate(id, Pedido, Total, key) {
+function viewDataUpdate(id, Personas, Telefono,Correo,Hora, key) {
     var response = "<input type='hidden' value='" + key + "' id='key'> "
+    response += "<input type='hidden' value='" + Hora + "' id='keyH'> "
     response += "<label for='exampleFormControlInput1' >Orden: "+id+"</label>"
     response += "</div>"
     response += "<br>"
-    response += "<label for='exampleFormControlInput1'>Descripcion</label>"
-    response +=  '  <textarea class="form-control" id="dire" rows="5" placeholder="Direccion" required="required" data-validation-required-message="Please enter a message.">'+Pedido+'</textarea>'
+    response += "<label for='exampleFormControlInput1'>Total de Personas</label>"
+    response += " <input type='text' class='form-control' value='" + Personas + "'  id='personas' placeholder='Personas'>"
     response += "</div>"
     response += "<div class='form-group'>"
-    response += " <label for='exampleFormControlTextarea1'>Total</label>"
-    response += " <input type='text' class='form-control' value='$" + Total + "'  id='precio1' placeholder='Precio'>"
+    response += " <label for='exampleFormControlTextarea1'>Correo</label>"
+    response += " <input type='text' class='form-control' value='" + Correo + "'  id='correo' placeholder='Correo'>"
+    response += "</div>"
+    response += "<div class='form-group'>"
+    response += " <label for='exampleFormControlTextarea1'>Telefono</label>"
+    response += " <input type='text' class='form-control' value='" + Telefono + "'  id='telefono' placeholder='Telefono'>"
     response += "</div>"
     response += ""
 
-
-    /*'<div class="form-group"><input type="hidden" value=' + key + ' id="key">' +
-        '<input type="text" id="nameEdit" class="form-control" placeholder="Name" value=' + name + '>' +
-        '</div>' +
-        '<div class="form-group">' +
-        '<textarea placeholder="DescriptionEdit" class="form-control" id="descEdit">' + description + '</textarea>' +
-        '</div>';*/
     inHTML('actualizar', response);
-    // update.disabled = false;
 }
 var reference = db.ref('Reservaciones/');
 reference.on('value', function (datas) {
     var data = datas.val();
+    inHTML("tabla", "");
     $.each(data, function (nodo, value) {
-        var sendData = table(value.Estado, value.Hora, value.ID, value.Pedido,value.Total, nodo);
+        var sendData = table(value.Estado, value.Hora, value.Personas, value.ID, value.Telefono,value.Correo, nodo);
         printHTML('tabla', sendData);
     });
 });
